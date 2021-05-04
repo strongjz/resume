@@ -11,33 +11,40 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
-      - name: Get Time
-        id: time
-        uses: nanzm/get-time-action@v1.1
-        with:
-          timeZone: 8
-          format: 'YYYY-MM-DD-HH-mm-ss'
+
+      - name: Get current time
+        uses: gerred/actions/current-time@master
+        id: current-time
+
+      - name: Use current time
+        env:
+          TIME: "${{ steps.current-time.outputs.time }}"
+        run: echo $TIME
 
       - name: Build HTML
         uses: avattathil/asciidoctor-action@master
+        env:
+          TIME: "${{ steps.current-time.outputs.time }}"
         with:
-          program: "asciidoctor -D . --backend=html5 RESUME.adoc"
+          program: "asciidoctor -D . --backend=html5 -o James-Strong-Resume--${{ env.TIME }}.html RESUME.adoc"
 
       - name: Upload HTML Artifact
         uses: actions/upload-artifact@v1
         env:
-          TIME: "${{ steps.time.outputs.time }}"
+          TIME: "${{ steps.current-time.outputs.time }}"
         with:
-          name: James-Strong-Resume-$TIME
-          path: RESUME.html
+          name: James-Strong-Resume-${{ env.TIME }}
+          path: James-Strong-Resume--${{ env.TIME }}.html
 
       - name: Build PDF
         uses: avattathil/asciidoctor-action@master
         with:
-          program: "asciidoctor-pdf -a allow-uri-read -D . RESUME.adoc"
+          program: "asciidoctor-pdf -a allow-uri-read -D . James-Strong-Resume--${{ env.TIME }}.pdf sRESUME.adoc"
 
       - name: Upload PDF Artifact
         uses: actions/upload-artifact@v2
+        env:
+          TIME: "${{ steps.current-time.outputs.time }}"
         with:
-          name: James-Strong-Resume-$TIME
-          path: James-Strong-Resume-$TIME.pdf
+          name: James-Strong-Resume-${{ env.TIME }}
+          path: James-Strong-Resume-${{ env.TIME }}.pdf
