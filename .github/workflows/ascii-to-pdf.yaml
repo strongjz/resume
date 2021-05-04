@@ -11,6 +11,12 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+      - name: Get Time
+        id: time
+        uses: nanzm/get-time-action@v1.1
+        with:
+          timeZone: 8
+          format: 'YYYY-MM-DD-HH-mm-ss'
 
       - name: Build HTML
         uses: avattathil/asciidoctor-action@master
@@ -19,8 +25,10 @@ jobs:
 
       - name: Upload HTML Artifact
         uses: actions/upload-artifact@v1
+        env:
+          TIME: "${{ steps.time.outputs.time }}"
         with:
-          name: HTML document
+          name: James-Strong-Resume-$TIME
           path: RESUME.html
 
       - name: Build PDF
@@ -31,5 +39,5 @@ jobs:
       - name: Upload PDF Artifact
         uses: actions/upload-artifact@v2
         with:
-          name: PDF document
-          path: RESUME.pdf
+          name: James-Strong-Resume-$TIME
+          path: James-Strong-Resume-$TIME.pdf
