@@ -21,7 +21,7 @@ jobs:
       - name: Build HTML
         uses: avattathil/asciidoctor-action@master
         env:
-          TIME: "${{ steps.current-time.outputs.time }}"
+          TIME: ${{ steps.time.outputs.date }}
         with:
           program: "asciidoctor -D . --backend=html5 -o James-Strong-Resume-${{ steps.time.outputs.date }}.html RESUME.adoc"
 
