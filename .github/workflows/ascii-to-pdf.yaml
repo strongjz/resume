@@ -13,31 +13,22 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Get current time
-        uses: 1466587594/get-current-time@v2
-        id: current-time
-        with:
-          format: YYYYMMDD-HH
-          utcOffset: "+04:00"
-        env:
-          TIME: "${{ steps.current-time.outputs.formattedTime }}"
-
-      - name: Use current time
-        env:
-          TIME: "${{ steps.current-time.outputs.time }}"
-        run: echo $TIME
+      - id: time
+        run: |
+          echo ::set-output name=date::$(TZ=Zulu date "+%Y-%m-%dTZ")
+        shell: bash
 
       - name: Build HTML
         uses: avattathil/asciidoctor-action@master
         env:
           TIME: "${{ steps.current-time.outputs.time }}"
         with:
-          program: "asciidoctor -D . --backend=html5 -o James-Strong-Resume-${{ env.TIME }}.html RESUME.adoc"
+          program: "asciidoctor -D . --backend=html5 -o James-Strong-Resume-${{ steps.time.outputs.date }}.html RESUME.adoc"
 
       - name: Upload HTML Artifact
         uses: actions/upload-artifact@v1
         env:
-          TIME: "${{ steps.current-time.outputs.time }}"
+          TIME: ${{ steps.time.outputs.date }}
         with:
           name: James-Strong-Resume-${{ env.TIME }}
           path: James-Strong-Resume--${{ env.TIME }}.html
@@ -45,14 +36,14 @@ jobs:
       - name: Build PDF
         uses: avattathil/asciidoctor-action@master
         env:
-          TIME: "${{ steps.current-time.outputs.time }}"
+          TIME: ${{ steps.time.outputs.date }}
         with:
           program: "asciidoctor-pdf -a allow-uri-read -D . James-Strong-Resume-${{ env.TIME }}.pdf RESUME.adoc"
 
       - name: Upload PDF Artifact
         uses: actions/upload-artifact@v2
         env:
-          TIME: "${{ steps.current-time.outputs.time }}"
+          TIME: ${{ steps.time.outputs.date }}
         with:
           name: James-Strong-Resume-${{ env.TIME }}
           path: James-Strong-Resume-${{ env.TIME }}.pdf
