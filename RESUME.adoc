@@ -1,8 +1,7 @@
-[.text-center]
-## James Strong
+= James Strong
 
-[.text-center]
-## Overview
+== Overview
+
 [.text-left]
 Experienced Technical Professional who works well with minimum supervision as well as a group member. Customer
 oriented problem solver with an ability to adapt to new situations. A quick learner with a desire for continuous
@@ -13,7 +12,7 @@ value for both clients and end users. Core competencies include:
 Amazon Web Services • Network Administration • Virtualization • Cloud Native • Linux • VMware • Web Services
 
 [.text-center]
-##  Contact
+==  Contact
 
 [.text-left]
 link:mailto:&#106;a&#109;&#x65;&#x73;&#x2e;&#x73;&#116;&#x72;&#x6f;n&#103;&#x40;&#108;i&#110;&#117;&#120;.&#99;o&#x6d;[&#106;a&#109;&#x65;&#x73;&#x2e;&#x73;&#116;&#x72;&#x6f;n&#103;&#x40;&#108;i&#110;&#117;&#120;.&#99;o&#x6d;]
@@ -27,7 +26,7 @@ https://twitter.com/strongjz
 https://github.com/strongjz
 
 [.text-center]
-## Professional Experience
+== Professional Experience
 
 [.text-left]
 === Chainguard • Lead Solutions Architect
@@ -253,7 +252,7 @@ Dayton, OH August '06 – September '09
 Worked with network management applications such as CiscoWorks, HP OpenView and AMP Airwave to monitor, diagnose, and
 troubleshoot wireless around campus. Deploying and Troubleshooting Network equipment across Campus.
 
-## Accreditations
+== Accreditations
 
 Current
 
@@ -273,7 +272,7 @@ Past
 * RedHat Certified System Administrator
 * VMWare Certified Professional 5
 
-## Education &amp; Memberships
+== Education &amp; Memberships
 
 Bachelor of Science in Computer Information Systems: U. of Dayton, Ohio 2010
 
