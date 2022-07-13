@@ -1,16 +1,17 @@
 name: build asciidoc
 
 on:
+  workflow_call:
   push:
     branches:
       - master
 jobs:
   asciidoc_build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     name: Build Asciidoc
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Get current time
         uses: 1466587594/get-current-time@v2
